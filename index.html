@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>韓語學習遊戲</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .word {
+            font-size: 2rem;
+            margin: 1rem 0;
+        }
+        input {
+            font-size: 1rem;
+            padding: 0.5rem;
+            margin: 1rem 0;
+            width: 200px;
+        }
+        button {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>韓語學習遊戲</h1>
+        <div class="word">
+            <span id="korean"></span>
+            <span id="chinese"></span>
+        </div>
+        <input type="text" id="userInput" placeholder="輸入羅馬拼音">
+        <button onclick="checkAnswer()">檢查</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const words = [
+            { korean: '안녕하세요', chinese: '你好', romanization: 'annyeonghaseyo' },
+            { korean: '감사합니다', chinese: '謝謝', romanization: 'gamsahamnida' },
+            { korean: '사랑해요', chinese: '我愛你', romanization: 'saranghaeyo' },
+            { korean: '미안해요', chinese: '對不起', romanization: 'mianhaeyo' },
+            { korean: '잘 가요', chinese: '再見', romanization: 'jal gayo' },
+            { korean: '먹다', chinese: '吃', romanization: 'meokda' },
+            { korean: '자다', chinese: '睡覺', romanization: 'jada' },
+            { korean: '가다', chinese: '去', romanization: 'gada' },
+            { korean: '오다', chinese: '來', romanization: 'oda' },
+            { korean: '보다', chinese: '看', romanization: 'boda' },
+            { korean: '듣다', chinese: '聽', romanization: 'deutda' },
+            { korean: '말하다', chinese: '說', romanization: 'malhada' },
+            { korean: '읽다', chinese: '讀', romanization: 'ikda' },
+            { korean: '쓰다', chinese: '寫', romanization: 'sseuda' },
+            { korean: '배우다', chinese: '學習', romanization: 'baeuda' },
+            { korean: '좋아하다', chinese: '喜歡', romanization: 'joahada' },
+            { korean: '싫어하다', chinese: '討厭', romanization: 'silheohada' },
+            { korean: '웃다', chinese: '笑', romanization: 'utda' },
+            { korean: '울다', chinese: '哭', romanization: 'ulda' },
+            { korean: '춤추다', chinese: '跳舞', romanization: 'chumchuda' },
+            { korean: '노래하다', chinese: '唱歌', romanization: 'noraehada' },
+            { korean: '공부하다', chinese: '學習', romanization: 'gongbuhada' },
+            { korean: '일하다', chinese: '工作', romanization: 'ilhada' },
+            { korean: '쉬다', chinese: '休息', romanization: 'swida' },
+            { korean: '놀다', chinese: '玩', romanization: 'nolda' },
+            { korean: '만나다', chinese: '見面', romanization: 'mannada' },
+            { korean: '살다', chinese: '生活', romanization: 'salda' },
+            { korean: '죽다', chinese: '死', romanization: 'jukda' },
+            { korean: '태어나다', chinese: '出生', romanization: 'taeeonada' },
+            { korean: '결혼하다', chinese: '結婚', romanization: 'gyeolhonhada' }
+        ];
+
+        let currentWord;
+
+        function newWord() {
+            currentWord = words[Math.floor(Math.random() * words.length)];
+            document.getElementById('korean').textContent = currentWord.korean;
+            document.getElementById('chinese').textContent = ` (${currentWord.chinese})`;
+            document.getElementById('userInput').value = '';
+            document.getElementById('result').textContent = '';
+        }
+
+        function checkAnswer() {
+            const userInput = document.getElementById('userInput').value.toLowerCase().trim();
+            const resultElement = document.getElementById('result');
+
+            if (userInput === currentWord.romanization) {
+                resultElement.textContent = '正確!';
+                resultElement.style.color = 'green';
+                setTimeout(newWord, 1500);
+            } else {
+                resultElement.textContent = `錯誤。正確答案是: ${currentWord.romanization}`;
+                resultElement.style.color = 'red';
+            }
+        }
+
+        newWord();
+    </script>
+</body>
+</html>
